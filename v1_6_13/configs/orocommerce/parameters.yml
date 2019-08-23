@@ -1,0 +1,33 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: db
+    database_port: 3306
+    database_name: orocommerce
+    database_user: orocommerce
+    database_password: orocommerce
+    database_driver_options: {  }
+    mailer_transport: mail
+    mailer_host: 127.0.0.1
+    mailer_port: null
+    mailer_encryption: null
+    mailer_user: null
+    mailer_password: null
+    websocket_bind_address: 0.0.0.0
+    websocket_bind_port: 8080
+    websocket_frontend_host: '*'
+    websocket_frontend_port: 8080
+    websocket_frontend_path: ''
+    websocket_backend_host: '*'
+    websocket_backend_port: 8080
+    websocket_backend_path: ''
+    web_backend_prefix: /admin
+    session_handler: session.handler.native_file
+    locale: de_DE
+    secret: ThisTokenIsNotSoSecretChangeIt
+    installed: null
+    assets_version: f8658010
+    assets_version_strategy: time_hash
+    message_queue_transport: dbal
+    message_queue_transport_config: null
+    enable_price_sharding: false

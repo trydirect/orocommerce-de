@@ -9,8 +9,8 @@ services:
     image: trydirect/orocommerce-de:1.6.13
     build: build/php7.1
     container_name: orocommerce-de
-    hostname: orocommerce-de
-    restart: always
+#    hostname: orocommerce-de
+#    restart: always
     ports:
           - "9000"
     volumes:
@@ -18,8 +18,9 @@ services:
         - /home/orocommerce/src/app/web
     links:
         - db
-    entrypoint: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n
-    working_dir: /home/orocommerce/
+#    entrypoint: /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n
+    entrypoint: bash -c "sleep infinity;"
+#    working_dir: /home/orocommerce/
 
   db:
     image: mysql:5.7

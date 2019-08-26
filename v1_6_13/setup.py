@@ -2,6 +2,7 @@
 
 import docker
 import shutil
+import time
 
 client = docker.from_env()
 
@@ -11,7 +12,7 @@ app.exec_run('mkdir -p ./app/logs && chmod 0777 -R ./app/logs && '
              'chmod 0777 -R web/web/js/translation/ && mkdir -p web/web/media && chmod 0777 -R web/web/media/ && '
              'mkdir -p web/web/uploads && chmod 0777 -R web/web/uploads/')
 app.exec_run('chown -R orocommerce:orocommerce *')
-app.exec_run('composer install --prefer-dist --no-dev')
+# print(app.exec_run('composer install --prefer-dist --no-dev').output)
 shutil.copyfile('./configs/orocommerce/parameters.yml', './src/app/config/parameters.yml')
 app.exec_run('rm -rf .app/cache/*')
 args = " --organization-name='tes' " \
@@ -19,7 +20,11 @@ args = " --organization-name='tes' " \
        "--user-firstname='test' --user-lastname='test " \
        "--user-password='test--sample-data='n' "
 app.exec_run('chown -R orocommerce:orocommerce *')
-print(app.exec_run('php ./app/console oro:install {} --drop-database --timeout=5800'.format(args)).output)
+print(app.exec_run('nohup php ./app/console oro:install {} --drop-database --timeout=12800'.format(args)).output)
+time.sleep(360*20)  # expect 20 mins for oro install
+proc = app.exec_run('ps aux |grep php ./app/console oro:install').output
+if 'oro:install' in proc:
+    time.sleep(360 * 10)  # expect 20 mins for oro install
 print(app.exec_run('rm -rf .app/cache/dev').output)
 print(app.exec_run('rm -rf .app/cache/prod').output)
 print(app.exec_run('php app/console cache:clear --env=prod').output)

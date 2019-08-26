@@ -20,11 +20,11 @@ args = " --organization-name='tes' " \
        "--user-firstname='test' --user-lastname='test " \
        "--user-password='test--sample-data='n' "
 app.exec_run('chown -R orocommerce:orocommerce *')
-print(app.exec_run('nohup php ./app/console oro:install {} --drop-database --timeout=12800'.format(args)).output)
-time.sleep(360*20)  # expect 20 mins for oro install
+app.exec_run('php ./app/console oro:install {} --drop-database --timeout=12800'.format(args), detach=True)
+time.sleep(20*60)  # expect 20 mins for oro install
 proc = app.exec_run('ps aux |grep php ./app/console oro:install').output
 if 'oro:install' in proc:
-    time.sleep(360 * 10)  # expect 20 mins for oro install
+    time.sleep(60 * 20)  # expect 20 mins for oro install
 print(app.exec_run('rm -rf .app/cache/dev').output)
 print(app.exec_run('rm -rf .app/cache/prod').output)
 print(app.exec_run('php app/console cache:clear --env=prod').output)

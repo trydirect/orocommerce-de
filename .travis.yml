@@ -26,12 +26,12 @@ install:
 before_script:
   - pip install requests
   - pip install docker
+  - python setup.py
   - cd $TRAVIS_BUILD_DIR
 
 
 script:
   - bash ./.travis/linters.sh
-  - python setup.py
   - python tests.py
 
 

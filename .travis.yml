@@ -31,6 +31,7 @@ before_script:
 
 script:
   - bash ./.travis/linters.sh
+  - python setup.py
   - python tests.py
 
 
